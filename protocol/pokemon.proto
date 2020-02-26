@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package protocol;
+
+message Pokemon{
+    string name = 1;
+    string image = 2;
+    int32 price = 3;
+    int32 healthPoints = 4;
+    int32 healthRegen = 5;
+    int32 mana = 6;
+    int32 manaRegen = 7;
+    float armor = 8;
+    int32 damage = 9;
+    int32 movementSpeed = 10;
+    int32 attackSpeed = 11;
+    int32 attackRange = 12;
+}
+message BuyRequest{
+    string login = 1;
+    int32 cost = 2;
+}
+message GetByIdRequest{
+    string id = 1;
+}
+message DeleteRequest{
+    string id = 1;
+}
+message GetByNameRequest{
+    string name = 1;
+}
+message EmptyResponse{
+
+}
+message FightResult{
+    string winner = 1;
+}
+message FightRequest{
+    string id1 = 1;
+    string id2 = 2;
+}
+service PokemonFightService{
+    rpc Create(Pokemon) returns(EmptyResponse);
+    rpc Delete(DeleteRequest) returns(EmptyResponse);
+    rpc Update(Pokemon) returns(EmptyResponse);
+    rpc GetByName(GetByNameRequest) returns(Pokemon);
+    rpc GetById(GetByIdRequest) returns(Pokemon);
+    rpc Buy(BuyRequest) returns(EmptyResponse);
+    rpc Fight(FightRequest) returns(FightResult);
+}
+
