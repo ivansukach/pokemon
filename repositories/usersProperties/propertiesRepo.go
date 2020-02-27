@@ -14,7 +14,7 @@ func New(db *sqlx.DB) Repository {
 }
 
 func (pr *propertiesRepository) Create(property *Properties) error {
-	_, err := pr.db.NamedExec("INSERT INTO userProperties VALUES (:idofpokemon, :login, :name)", property)
+	_, err := pr.db.NamedExec("INSERT INTO userProperties VALUES (:login, :name)", property) //??
 	return err
 }
 
@@ -22,8 +22,8 @@ func (pr *propertiesRepository) Delete(id string) error {
 	_, err := pr.db.Exec("DELETE FROM userProperties WHERE IdOfPokemon=$1", id)
 	return err
 }
-func (pr *propertiesRepository) GetAll() ([]Properties, error) {
-	rows, err := pr.db.Queryx("SELECT * FROM userProperties")
+func (pr *propertiesRepository) GetAll(login string) ([]Properties, error) {
+	rows, err := pr.db.Queryx("SELECT * FROM userProperties WHERE Login=$1", login)
 	if err != nil {
 		log.Warning(err)
 		return nil, err

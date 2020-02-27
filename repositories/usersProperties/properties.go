@@ -8,5 +8,5 @@ type Properties struct {
 type Repository interface {
 	Create(property *Properties) error
 	Delete(id string) error
-	GetAll() ([]Properties, error)
+	GetAll(login string) ([]Properties, error)
 }
