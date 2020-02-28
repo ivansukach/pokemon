@@ -14,11 +14,11 @@ func New(db *sqlx.DB) Repository {
 }
 
 func (pr *propertiesRepository) Create(property *Properties) error {
-	_, err := pr.db.NamedExec("INSERT INTO userProperties VALUES (:login, :name)", property) //??
+	_, err := pr.db.NamedExec("INSERT INTO userProperties VALUES (Login=:login, :name)", property) //??
 	return err
 }
 
-func (pr *propertiesRepository) Delete(id string) error {
+func (pr *propertiesRepository) Delete(id int64) error {
 	_, err := pr.db.Exec("DELETE FROM userProperties WHERE IdOfPokemon=$1", id)
 	return err
 }
@@ -39,4 +39,13 @@ func (pr *propertiesRepository) GetAll(login string) ([]Properties, error) {
 		p = append(p, property)
 	}
 	return p, err
+}
+func (pr *propertiesRepository) GetNameById(id int64) (string, error) {
+	p := Properties{}
+	err := pr.db.QueryRowx("SELECT Name FROM userProperties WHERE Id=$1", id).StructScan(&p.Name)
+	if err != nil {
+		log.Error(err)
+		return "", err
+	}
+	return p.Name, nil
 }

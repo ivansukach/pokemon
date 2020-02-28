@@ -18,13 +18,17 @@ message Pokemon{
 }
 message BuyRequest{
     string login = 1;
-    int32 cost = 2;
+    string name = 2;
+}
+message SellRequest{
+    string login = 1;
+    int64 id = 2;
 }
 message GetByIdRequest{
-    string id = 1;
+    int64 id = 1;
 }
 message DeleteRequest{
-    string id = 1;
+    string Name = 1;
 }
 message GetByNameRequest{
     string name = 1;
@@ -35,17 +39,27 @@ message EmptyResponse{
 message FightResult{
     string winner = 1;
 }
-message FightRequest{
-    string id1 = 1;
-    string id2 = 2;
+message DamageRequest{
+    int64 idArena = 1;
+    int32 damageAmount = 2;
+    int64 idOfDamageReceiver = 3;
+}
+message CreateArenaRequest{
+    int64 id1 = 1;
+    int64 id2 = 2;
+}
+message ArenaId{
+    int64 idArena = 1;
 }
 service PokemonFightService{
-    rpc Create(Pokemon) returns(EmptyResponse);
-    rpc Delete(DeleteRequest) returns(EmptyResponse);
-    rpc Update(Pokemon) returns(EmptyResponse);
-    rpc GetByName(GetByNameRequest) returns(Pokemon);
-    rpc GetById(GetByIdRequest) returns(Pokemon);
-    rpc Buy(BuyRequest) returns(EmptyResponse);
-    rpc Fight(FightRequest) returns(FightResult);
+    rpc Create(Pokemon) returns(EmptyResponse);//
+    rpc Delete(DeleteRequest) returns(EmptyResponse);//
+    rpc Update(Pokemon) returns(EmptyResponse);//
+    rpc GetByName(GetByNameRequest) returns(Pokemon);//
+    rpc GetById(GetByIdRequest) returns(Pokemon);//
+    rpc Buy(BuyRequest) returns(EmptyResponse);//
+    rpc Sell(SellRequest) returns(EmptyResponse);//
+    rpc CreateArena(CreateArenaRequest) returns(ArenaId);//
+    rpc MakeDamage(DamageRequest) returns(EmptyResponse);//
 }
 

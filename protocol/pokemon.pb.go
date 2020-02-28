@@ -153,7 +153,7 @@ func (m *Pokemon) GetAttackRange() int32 {
 
 type BuyRequest struct {
 	Login                string   `protobuf:"bytes,1,opt,name=login,proto3" json:"login,omitempty"`
-	Cost                 int32    `protobuf:"varint,2,opt,name=cost,proto3" json:"cost,omitempty"`
+	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -191,15 +191,62 @@ func (m *BuyRequest) GetLogin() string {
 	return ""
 }
 
-func (m *BuyRequest) GetCost() int32 {
+func (m *BuyRequest) GetName() string {
 	if m != nil {
-		return m.Cost
+		return m.Name
+	}
+	return ""
+}
+
+type SellRequest struct {
+	Login                string   `protobuf:"bytes,1,opt,name=login,proto3" json:"login,omitempty"`
+	Id                   int64    `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *SellRequest) Reset()         { *m = SellRequest{} }
+func (m *SellRequest) String() string { return proto.CompactTextString(m) }
+func (*SellRequest) ProtoMessage()    {}
+func (*SellRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_75142c9f6896f36f, []int{2}
+}
+
+func (m *SellRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_SellRequest.Unmarshal(m, b)
+}
+func (m *SellRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_SellRequest.Marshal(b, m, deterministic)
+}
+func (m *SellRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SellRequest.Merge(m, src)
+}
+func (m *SellRequest) XXX_Size() int {
+	return xxx_messageInfo_SellRequest.Size(m)
+}
+func (m *SellRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_SellRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SellRequest proto.InternalMessageInfo
+
+func (m *SellRequest) GetLogin() string {
+	if m != nil {
+		return m.Login
+	}
+	return ""
+}
+
+func (m *SellRequest) GetId() int64 {
+	if m != nil {
+		return m.Id
 	}
 	return 0
 }
 
 type GetByIdRequest struct {
-	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -209,7 +256,7 @@ func (m *GetByIdRequest) Reset()         { *m = GetByIdRequest{} }
 func (m *GetByIdRequest) String() string { return proto.CompactTextString(m) }
 func (*GetByIdRequest) ProtoMessage()    {}
 func (*GetByIdRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_75142c9f6896f36f, []int{2}
+	return fileDescriptor_75142c9f6896f36f, []int{3}
 }
 
 func (m *GetByIdRequest) XXX_Unmarshal(b []byte) error {
@@ -230,15 +277,15 @@ func (m *GetByIdRequest) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_GetByIdRequest proto.InternalMessageInfo
 
-func (m *GetByIdRequest) GetId() string {
+func (m *GetByIdRequest) GetId() int64 {
 	if m != nil {
 		return m.Id
 	}
-	return ""
+	return 0
 }
 
 type DeleteRequest struct {
-	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                 string   `protobuf:"bytes,1,opt,name=Name,json=name,proto3" json:"Name,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -248,7 +295,7 @@ func (m *DeleteRequest) Reset()         { *m = DeleteRequest{} }
 func (m *DeleteRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteRequest) ProtoMessage()    {}
 func (*DeleteRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_75142c9f6896f36f, []int{3}
+	return fileDescriptor_75142c9f6896f36f, []int{4}
 }
 
 func (m *DeleteRequest) XXX_Unmarshal(b []byte) error {
@@ -269,9 +316,9 @@ func (m *DeleteRequest) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_DeleteRequest proto.InternalMessageInfo
 
-func (m *DeleteRequest) GetId() string {
+func (m *DeleteRequest) GetName() string {
 	if m != nil {
-		return m.Id
+		return m.Name
 	}
 	return ""
 }
@@ -287,7 +334,7 @@ func (m *GetByNameRequest) Reset()         { *m = GetByNameRequest{} }
 func (m *GetByNameRequest) String() string { return proto.CompactTextString(m) }
 func (*GetByNameRequest) ProtoMessage()    {}
 func (*GetByNameRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_75142c9f6896f36f, []int{4}
+	return fileDescriptor_75142c9f6896f36f, []int{5}
 }
 
 func (m *GetByNameRequest) XXX_Unmarshal(b []byte) error {
@@ -325,7 +372,7 @@ func (m *EmptyResponse) Reset()         { *m = EmptyResponse{} }
 func (m *EmptyResponse) String() string { return proto.CompactTextString(m) }
 func (*EmptyResponse) ProtoMessage()    {}
 func (*EmptyResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_75142c9f6896f36f, []int{5}
+	return fileDescriptor_75142c9f6896f36f, []int{6}
 }
 
 func (m *EmptyResponse) XXX_Unmarshal(b []byte) error {
@@ -357,7 +404,7 @@ func (m *FightResult) Reset()         { *m = FightResult{} }
 func (m *FightResult) String() string { return proto.CompactTextString(m) }
 func (*FightResult) ProtoMessage()    {}
 func (*FightResult) Descriptor() ([]byte, []int) {
-	return fileDescriptor_75142c9f6896f36f, []int{6}
+	return fileDescriptor_75142c9f6896f36f, []int{7}
 }
 
 func (m *FightResult) XXX_Unmarshal(b []byte) error {
@@ -385,98 +432,202 @@ func (m *FightResult) GetWinner() string {
 	return ""
 }
 
-type FightRequest struct {
-	Id1                  string   `protobuf:"bytes,1,opt,name=id1,proto3" json:"id1,omitempty"`
-	Id2                  string   `protobuf:"bytes,2,opt,name=id2,proto3" json:"id2,omitempty"`
+type DamageRequest struct {
+	IdArena              int64    `protobuf:"varint,1,opt,name=idArena,proto3" json:"idArena,omitempty"`
+	DamageAmount         int32    `protobuf:"varint,2,opt,name=damageAmount,proto3" json:"damageAmount,omitempty"`
+	IdOfDamageReceiver   int64    `protobuf:"varint,3,opt,name=idOfDamageReceiver,proto3" json:"idOfDamageReceiver,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *FightRequest) Reset()         { *m = FightRequest{} }
-func (m *FightRequest) String() string { return proto.CompactTextString(m) }
-func (*FightRequest) ProtoMessage()    {}
-func (*FightRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_75142c9f6896f36f, []int{7}
+func (m *DamageRequest) Reset()         { *m = DamageRequest{} }
+func (m *DamageRequest) String() string { return proto.CompactTextString(m) }
+func (*DamageRequest) ProtoMessage()    {}
+func (*DamageRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_75142c9f6896f36f, []int{8}
 }
 
-func (m *FightRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_FightRequest.Unmarshal(m, b)
+func (m *DamageRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DamageRequest.Unmarshal(m, b)
 }
-func (m *FightRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_FightRequest.Marshal(b, m, deterministic)
+func (m *DamageRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DamageRequest.Marshal(b, m, deterministic)
 }
-func (m *FightRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_FightRequest.Merge(m, src)
+func (m *DamageRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DamageRequest.Merge(m, src)
 }
-func (m *FightRequest) XXX_Size() int {
-	return xxx_messageInfo_FightRequest.Size(m)
+func (m *DamageRequest) XXX_Size() int {
+	return xxx_messageInfo_DamageRequest.Size(m)
 }
-func (m *FightRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_FightRequest.DiscardUnknown(m)
+func (m *DamageRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DamageRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_FightRequest proto.InternalMessageInfo
+var xxx_messageInfo_DamageRequest proto.InternalMessageInfo
 
-func (m *FightRequest) GetId1() string {
+func (m *DamageRequest) GetIdArena() int64 {
+	if m != nil {
+		return m.IdArena
+	}
+	return 0
+}
+
+func (m *DamageRequest) GetDamageAmount() int32 {
+	if m != nil {
+		return m.DamageAmount
+	}
+	return 0
+}
+
+func (m *DamageRequest) GetIdOfDamageReceiver() int64 {
+	if m != nil {
+		return m.IdOfDamageReceiver
+	}
+	return 0
+}
+
+type CreateArenaRequest struct {
+	Id1                  int64    `protobuf:"varint,1,opt,name=id1,proto3" json:"id1,omitempty"`
+	Id2                  int64    `protobuf:"varint,2,opt,name=id2,proto3" json:"id2,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CreateArenaRequest) Reset()         { *m = CreateArenaRequest{} }
+func (m *CreateArenaRequest) String() string { return proto.CompactTextString(m) }
+func (*CreateArenaRequest) ProtoMessage()    {}
+func (*CreateArenaRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_75142c9f6896f36f, []int{9}
+}
+
+func (m *CreateArenaRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateArenaRequest.Unmarshal(m, b)
+}
+func (m *CreateArenaRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateArenaRequest.Marshal(b, m, deterministic)
+}
+func (m *CreateArenaRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateArenaRequest.Merge(m, src)
+}
+func (m *CreateArenaRequest) XXX_Size() int {
+	return xxx_messageInfo_CreateArenaRequest.Size(m)
+}
+func (m *CreateArenaRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateArenaRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateArenaRequest proto.InternalMessageInfo
+
+func (m *CreateArenaRequest) GetId1() int64 {
 	if m != nil {
 		return m.Id1
 	}
-	return ""
+	return 0
 }
 
-func (m *FightRequest) GetId2() string {
+func (m *CreateArenaRequest) GetId2() int64 {
 	if m != nil {
 		return m.Id2
 	}
-	return ""
+	return 0
+}
+
+type ArenaId struct {
+	IdArena              int64    `protobuf:"varint,1,opt,name=idArena,proto3" json:"idArena,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ArenaId) Reset()         { *m = ArenaId{} }
+func (m *ArenaId) String() string { return proto.CompactTextString(m) }
+func (*ArenaId) ProtoMessage()    {}
+func (*ArenaId) Descriptor() ([]byte, []int) {
+	return fileDescriptor_75142c9f6896f36f, []int{10}
+}
+
+func (m *ArenaId) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ArenaId.Unmarshal(m, b)
+}
+func (m *ArenaId) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ArenaId.Marshal(b, m, deterministic)
+}
+func (m *ArenaId) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ArenaId.Merge(m, src)
+}
+func (m *ArenaId) XXX_Size() int {
+	return xxx_messageInfo_ArenaId.Size(m)
+}
+func (m *ArenaId) XXX_DiscardUnknown() {
+	xxx_messageInfo_ArenaId.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ArenaId proto.InternalMessageInfo
+
+func (m *ArenaId) GetIdArena() int64 {
+	if m != nil {
+		return m.IdArena
+	}
+	return 0
 }
 
 func init() {
 	proto.RegisterType((*Pokemon)(nil), "protocol.Pokemon")
 	proto.RegisterType((*BuyRequest)(nil), "protocol.BuyRequest")
+	proto.RegisterType((*SellRequest)(nil), "protocol.SellRequest")
 	proto.RegisterType((*GetByIdRequest)(nil), "protocol.GetByIdRequest")
 	proto.RegisterType((*DeleteRequest)(nil), "protocol.DeleteRequest")
 	proto.RegisterType((*GetByNameRequest)(nil), "protocol.GetByNameRequest")
 	proto.RegisterType((*EmptyResponse)(nil), "protocol.EmptyResponse")
 	proto.RegisterType((*FightResult)(nil), "protocol.FightResult")
-	proto.RegisterType((*FightRequest)(nil), "protocol.FightRequest")
+	proto.RegisterType((*DamageRequest)(nil), "protocol.DamageRequest")
+	proto.RegisterType((*CreateArenaRequest)(nil), "protocol.CreateArenaRequest")
+	proto.RegisterType((*ArenaId)(nil), "protocol.ArenaId")
 }
 
 func init() { proto.RegisterFile("pokemon.proto", fileDescriptor_75142c9f6896f36f) }
 
 var fileDescriptor_75142c9f6896f36f = []byte{
-	// 480 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x52, 0x4d, 0x6f, 0xd3, 0x40,
-	0x10, 0x55, 0x92, 0xda, 0x69, 0x26, 0x49, 0x29, 0x4b, 0x29, 0xab, 0x08, 0x09, 0xcb, 0x02, 0x94,
-	0x53, 0x24, 0x42, 0x94, 0x03, 0xc7, 0xf0, 0x25, 0x2e, 0xa8, 0x72, 0xc5, 0x0f, 0x58, 0xe2, 0x91,
-	0x63, 0xd5, 0xbb, 0x6b, 0xec, 0x4d, 0x51, 0x7e, 0x0d, 0xbf, 0x8b, 0x7f, 0x83, 0x76, 0x76, 0x1b,
-	0x3b, 0x6d, 0x73, 0xe0, 0xe4, 0x99, 0x37, 0xef, 0x6d, 0x5e, 0xde, 0x0c, 0x8c, 0x4b, 0x7d, 0x83,
-	0x52, 0xab, 0x59, 0x59, 0x69, 0xa3, 0xd9, 0x29, 0x7d, 0xd6, 0xba, 0x88, 0xff, 0x76, 0xa1, 0x7f,
-	0xe5, 0x66, 0x8c, 0xc1, 0x89, 0x12, 0x12, 0x79, 0x27, 0xea, 0x4c, 0x07, 0x09, 0xd5, 0xec, 0x02,
-	0x82, 0x5c, 0x8a, 0x0c, 0x79, 0x97, 0x40, 0xd7, 0x58, 0xb4, 0xac, 0xf2, 0x35, 0xf2, 0x5e, 0xd4,
-	0x99, 0x06, 0x89, 0x6b, 0x58, 0x0c, 0xa3, 0x0d, 0x8a, 0xc2, 0x6c, 0xae, 0x74, 0xae, 0x4c, 0xcd,
-	0x4f, 0x68, 0x78, 0x80, 0xb1, 0x08, 0x86, 0xae, 0x4f, 0x30, 0x43, 0xc5, 0x03, 0xa2, 0xb4, 0x21,
-	0xeb, 0x42, 0x0a, 0x25, 0x78, 0x48, 0x23, 0xaa, 0xd9, 0x4b, 0x18, 0xd8, 0xaf, 0xd3, 0xf4, 0x69,
-	0xd0, 0x00, 0xd6, 0x8d, 0xa8, 0xa4, 0xae, 0xf8, 0x69, 0xd4, 0x99, 0x76, 0x13, 0xd7, 0xb0, 0x4b,
-	0x08, 0x53, 0x41, 0xd6, 0x07, 0x24, 0xf0, 0x1d, 0x7b, 0x0d, 0x63, 0xa9, 0x6f, 0x51, 0xa2, 0x32,
-	0xd7, 0x25, 0x62, 0xca, 0x81, 0xc6, 0x87, 0xa0, 0xf5, 0x29, 0x8c, 0x11, 0xeb, 0x1b, 0xc7, 0x19,
-	0x3a, 0x9f, 0x2d, 0xa8, 0x61, 0x24, 0x42, 0x65, 0xc8, 0x47, 0x6d, 0x06, 0x41, 0xf1, 0x12, 0x60,
-	0xb5, 0xdd, 0x25, 0xf8, 0x6b, 0x8b, 0xb5, 0xb1, 0x2e, 0x0b, 0x9d, 0xe5, 0xca, 0xc7, 0xeb, 0x1a,
-	0xfb, 0x6f, 0xd7, 0xba, 0x36, 0x14, 0x6f, 0x90, 0x50, 0x1d, 0x47, 0x70, 0xf6, 0x15, 0xcd, 0x6a,
-	0xf7, 0x2d, 0xbd, 0xd3, 0x9e, 0x41, 0x37, 0x4f, 0xbd, 0xb0, 0x9b, 0xa7, 0xf1, 0x2b, 0x18, 0x7f,
-	0xc2, 0x02, 0x0d, 0x1e, 0x23, 0xbc, 0x85, 0x73, 0x7a, 0xe2, 0xbb, 0x90, 0x7b, 0xce, 0x23, 0xeb,
-	0x8d, 0x9f, 0xc0, 0xf8, 0xb3, 0x2c, 0xcd, 0x2e, 0xc1, 0xba, 0xd4, 0xaa, 0xc6, 0xf8, 0x0d, 0x0c,
-	0xbf, 0xe4, 0xd9, 0xc6, 0x24, 0x58, 0x6f, 0x0b, 0x63, 0x43, 0xfc, 0x9d, 0x2b, 0x85, 0x95, 0x57,
-	0xf9, 0x2e, 0x9e, 0xc3, 0xc8, 0xd3, 0xdc, 0xdb, 0xe7, 0xd0, 0xcb, 0xd3, 0x77, 0x9e, 0x64, 0x4b,
-	0x87, 0xcc, 0xfd, 0xd9, 0xd8, 0x72, 0xfe, 0xa7, 0x07, 0xcf, 0xfc, 0xa9, 0x91, 0xf6, 0x1a, 0xab,
-	0x5b, 0x7b, 0x36, 0x0b, 0x08, 0x3f, 0x56, 0x28, 0x0c, 0xb2, 0xa7, 0xb3, 0xbb, 0xbb, 0x9c, 0x79,
-	0xe2, 0xe4, 0x45, 0x03, 0x1d, 0x18, 0x65, 0x1f, 0x20, 0x74, 0x11, 0xb0, 0x16, 0xe5, 0x20, 0x94,
-	0xe3, 0xda, 0x05, 0x84, 0x3f, 0xca, 0xf4, 0xff, 0x7f, 0x71, 0xb0, 0xcf, 0x94, 0x4d, 0x1a, 0xd6,
-	0xfd, 0xa0, 0x27, 0x0f, 0x1f, 0x65, 0x4b, 0xe8, 0xfb, 0x95, 0x32, 0x7e, 0x4f, 0xb9, 0xdf, 0xf2,
-	0x63, 0xba, 0x05, 0xf4, 0x56, 0xdb, 0x1d, 0xbb, 0x68, 0x26, 0xcd, 0x45, 0x1d, 0x77, 0xba, 0x84,
-	0x80, 0x12, 0x66, 0x97, 0x0d, 0xa3, 0xbd, 0xae, 0xc9, 0xf3, 0x07, 0xb8, 0xdd, 0xf6, 0xcf, 0x90,
-	0xd0, 0xf7, 0xff, 0x02, 0x00, 0x00, 0xff, 0xff, 0x7a, 0xcb, 0x2c, 0x47, 0x2e, 0x04, 0x00, 0x00,
+	// 588 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x53, 0xcd, 0x6e, 0xd3, 0x40,
+	0x10, 0x56, 0x9c, 0xc4, 0x69, 0x26, 0x4d, 0x29, 0x43, 0x01, 0xab, 0xea, 0x21, 0x72, 0x01, 0xe5,
+	0x14, 0x89, 0x36, 0x8a, 0x10, 0x87, 0x4a, 0x0d, 0x05, 0xd4, 0x03, 0x50, 0x39, 0xe2, 0x01, 0x96,
+	0x78, 0x48, 0x56, 0xb1, 0x77, 0x8d, 0xb3, 0x09, 0xca, 0x81, 0x67, 0xe1, 0xb9, 0x78, 0x1b, 0xb4,
+	0xbb, 0x76, 0x6c, 0xa7, 0x0d, 0x12, 0x27, 0xef, 0x7c, 0xf3, 0x7d, 0xbb, 0x9f, 0xe7, 0x07, 0xba,
+	0x89, 0x5c, 0x50, 0x2c, 0xc5, 0x20, 0x49, 0xa5, 0x92, 0x78, 0x60, 0x3e, 0x53, 0x19, 0xf9, 0x7f,
+	0x1c, 0x68, 0xdd, 0xd9, 0x1c, 0x22, 0x34, 0x04, 0x8b, 0xc9, 0xab, 0xf5, 0x6a, 0xfd, 0x76, 0x60,
+	0xce, 0x78, 0x02, 0x4d, 0x1e, 0xb3, 0x19, 0x79, 0x8e, 0x01, 0x6d, 0xa0, 0xd1, 0x24, 0xe5, 0x53,
+	0xf2, 0xea, 0xbd, 0x5a, 0xbf, 0x19, 0xd8, 0x00, 0x7d, 0x38, 0x9c, 0x13, 0x8b, 0xd4, 0xfc, 0x4e,
+	0x72, 0xa1, 0x96, 0x5e, 0xc3, 0x24, 0x2b, 0x18, 0xf6, 0xa0, 0x63, 0xe3, 0x80, 0x66, 0x24, 0xbc,
+	0xa6, 0xa1, 0x94, 0x21, 0xed, 0x22, 0x66, 0x82, 0x79, 0xae, 0x49, 0x99, 0x33, 0x9e, 0x41, 0x5b,
+	0x7f, 0xad, 0xa6, 0x65, 0x12, 0x05, 0xa0, 0xdd, 0xb0, 0x34, 0x96, 0xa9, 0x77, 0xd0, 0xab, 0xf5,
+	0x9d, 0xc0, 0x06, 0xf8, 0x0c, 0xdc, 0x90, 0x19, 0xeb, 0x6d, 0x23, 0xc8, 0x22, 0x7c, 0x01, 0xdd,
+	0x58, 0xae, 0x29, 0x26, 0xa1, 0x26, 0x09, 0x51, 0xe8, 0x81, 0x49, 0x57, 0x41, 0xed, 0x93, 0x29,
+	0xc5, 0xa6, 0x0b, 0xcb, 0xe9, 0x58, 0x9f, 0x25, 0xa8, 0x60, 0x04, 0x4c, 0xcc, 0xc8, 0x3b, 0x2c,
+	0x33, 0x0c, 0xe4, 0x8f, 0x00, 0xc6, 0xab, 0x4d, 0x40, 0x3f, 0x56, 0xb4, 0x54, 0xda, 0x65, 0x24,
+	0x67, 0x5c, 0x64, 0xe5, 0xb5, 0xc1, 0xb6, 0xe6, 0x4e, 0x51, 0x73, 0xff, 0x12, 0x3a, 0x13, 0x8a,
+	0xa2, 0x7f, 0x0b, 0x8f, 0xc0, 0xe1, 0xa1, 0x91, 0xd5, 0x03, 0x87, 0x87, 0x7e, 0x0f, 0x8e, 0x3e,
+	0x92, 0x1a, 0x6f, 0x6e, 0xc3, 0x5c, 0x67, 0x19, 0xb5, 0x2d, 0xe3, 0x1c, 0xba, 0x37, 0x14, 0x91,
+	0xa2, 0x9c, 0x80, 0xd0, 0xf8, 0xbc, 0xd3, 0x6f, 0xff, 0x15, 0x1c, 0x9b, 0x6b, 0x74, 0xa2, 0xc4,
+	0xdb, 0x9d, 0x0b, 0xff, 0x11, 0x74, 0xdf, 0xc7, 0x89, 0xda, 0x04, 0xb4, 0x4c, 0xa4, 0x58, 0x92,
+	0xff, 0x12, 0x3a, 0x1f, 0xf8, 0x6c, 0xae, 0x02, 0x5a, 0xae, 0x22, 0xa5, 0xab, 0xff, 0x93, 0x0b,
+	0x41, 0x69, 0xa6, 0xca, 0x22, 0xff, 0x17, 0x74, 0x6f, 0x4c, 0x1f, 0xf2, 0xcb, 0x3d, 0x68, 0xf1,
+	0xf0, 0x3a, 0x25, 0xc1, 0x32, 0xab, 0x79, 0xa8, 0xc7, 0xc9, 0xb6, 0xec, 0x3a, 0x96, 0x2b, 0xa1,
+	0xcc, 0xbf, 0x36, 0x83, 0x0a, 0x86, 0x03, 0x40, 0x1e, 0x7e, 0xf9, 0x9e, 0x5f, 0x39, 0x25, 0xbe,
+	0xa6, 0xd4, 0x4c, 0x65, 0x3d, 0x78, 0x20, 0xe3, 0xbf, 0x01, 0x7c, 0x97, 0x12, 0x53, 0x64, 0x9e,
+	0xc8, 0x3d, 0x1c, 0x43, 0x9d, 0x87, 0xaf, 0xb3, 0xf7, 0xf5, 0xd1, 0x22, 0x17, 0x59, 0x79, 0xf5,
+	0xd1, 0x3f, 0x87, 0x96, 0xd1, 0xdc, 0x86, 0xfb, 0x2d, 0x5f, 0xfc, 0x6e, 0xc0, 0x93, 0x6c, 0x9b,
+	0x4c, 0x31, 0x26, 0x94, 0xae, 0xf5, 0x66, 0x0c, 0xc1, 0xb5, 0xcf, 0xe2, 0xe3, 0x41, 0xbe, 0x7a,
+	0x83, 0x8c, 0x78, 0xfa, 0xbc, 0x80, 0x2a, 0x25, 0xc5, 0xb7, 0xe0, 0xda, 0x86, 0x61, 0x89, 0x52,
+	0x69, 0xe1, 0x7e, 0xed, 0x10, 0xdc, 0xaf, 0x49, 0xf8, 0xff, 0x2f, 0xb6, 0xb7, 0xdd, 0xc7, 0xd3,
+	0x82, 0xb5, 0x3b, 0x12, 0xa7, 0xf7, 0x2f, 0xc5, 0x11, 0xb4, 0xb2, 0x01, 0x44, 0x6f, 0x47, 0xb9,
+	0x9d, 0xc9, 0x87, 0x74, 0x43, 0xa8, 0x8f, 0x57, 0x1b, 0x3c, 0x29, 0x32, 0xc5, 0xd2, 0xec, 0x77,
+	0x3a, 0x82, 0x86, 0xde, 0x11, 0x7c, 0x5a, 0x10, 0x4a, 0x3b, 0xb3, 0x5f, 0x77, 0x05, 0x9d, 0xd2,
+	0x00, 0xe0, 0x59, 0xc1, 0xbb, 0x3f, 0x17, 0x65, 0xb7, 0x79, 0xef, 0xaf, 0x00, 0x3e, 0xb1, 0x05,
+	0xd9, 0xb1, 0xaa, 0xf4, 0xa5, 0x3c, 0xd5, 0x7b, 0xdf, 0xff, 0xe6, 0x1a, 0xfc, 0xf2, 0x6f, 0x00,
+	0x00, 0x00, 0xff, 0xff, 0xe6, 0x4f, 0x74, 0x23, 0x91, 0x05, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -497,7 +648,9 @@ type PokemonFightServiceClient interface {
 	GetByName(ctx context.Context, in *GetByNameRequest, opts ...grpc.CallOption) (*Pokemon, error)
 	GetById(ctx context.Context, in *GetByIdRequest, opts ...grpc.CallOption) (*Pokemon, error)
 	Buy(ctx context.Context, in *BuyRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
-	Fight(ctx context.Context, in *FightRequest, opts ...grpc.CallOption) (*FightResult, error)
+	Sell(ctx context.Context, in *SellRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+	CreateArena(ctx context.Context, in *CreateArenaRequest, opts ...grpc.CallOption) (*ArenaId, error)
+	MakeDamage(ctx context.Context, in *DamageRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
 }
 
 type pokemonFightServiceClient struct {
@@ -562,9 +715,27 @@ func (c *pokemonFightServiceClient) Buy(ctx context.Context, in *BuyRequest, opt
 	return out, nil
 }
 
-func (c *pokemonFightServiceClient) Fight(ctx context.Context, in *FightRequest, opts ...grpc.CallOption) (*FightResult, error) {
-	out := new(FightResult)
-	err := c.cc.Invoke(ctx, "/protocol.PokemonFightService/Fight", in, out, opts...)
+func (c *pokemonFightServiceClient) Sell(ctx context.Context, in *SellRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := c.cc.Invoke(ctx, "/protocol.PokemonFightService/Sell", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pokemonFightServiceClient) CreateArena(ctx context.Context, in *CreateArenaRequest, opts ...grpc.CallOption) (*ArenaId, error) {
+	out := new(ArenaId)
+	err := c.cc.Invoke(ctx, "/protocol.PokemonFightService/CreateArena", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pokemonFightServiceClient) MakeDamage(ctx context.Context, in *DamageRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := c.cc.Invoke(ctx, "/protocol.PokemonFightService/MakeDamage", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -579,7 +750,9 @@ type PokemonFightServiceServer interface {
 	GetByName(context.Context, *GetByNameRequest) (*Pokemon, error)
 	GetById(context.Context, *GetByIdRequest) (*Pokemon, error)
 	Buy(context.Context, *BuyRequest) (*EmptyResponse, error)
-	Fight(context.Context, *FightRequest) (*FightResult, error)
+	Sell(context.Context, *SellRequest) (*EmptyResponse, error)
+	CreateArena(context.Context, *CreateArenaRequest) (*ArenaId, error)
+	MakeDamage(context.Context, *DamageRequest) (*EmptyResponse, error)
 }
 
 // UnimplementedPokemonFightServiceServer can be embedded to have forward compatible implementations.
@@ -604,8 +777,14 @@ func (*UnimplementedPokemonFightServiceServer) GetById(ctx context.Context, req 
 func (*UnimplementedPokemonFightServiceServer) Buy(ctx context.Context, req *BuyRequest) (*EmptyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Buy not implemented")
 }
-func (*UnimplementedPokemonFightServiceServer) Fight(ctx context.Context, req *FightRequest) (*FightResult, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Fight not implemented")
+func (*UnimplementedPokemonFightServiceServer) Sell(ctx context.Context, req *SellRequest) (*EmptyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Sell not implemented")
+}
+func (*UnimplementedPokemonFightServiceServer) CreateArena(ctx context.Context, req *CreateArenaRequest) (*ArenaId, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateArena not implemented")
+}
+func (*UnimplementedPokemonFightServiceServer) MakeDamage(ctx context.Context, req *DamageRequest) (*EmptyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MakeDamage not implemented")
 }
 
 func RegisterPokemonFightServiceServer(s *grpc.Server, srv PokemonFightServiceServer) {
@@ -720,20 +899,56 @@ func _PokemonFightService_Buy_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PokemonFightService_Fight_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FightRequest)
+func _PokemonFightService_Sell_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SellRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PokemonFightServiceServer).Fight(ctx, in)
+		return srv.(PokemonFightServiceServer).Sell(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/protocol.PokemonFightService/Fight",
+		FullMethod: "/protocol.PokemonFightService/Sell",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PokemonFightServiceServer).Fight(ctx, req.(*FightRequest))
+		return srv.(PokemonFightServiceServer).Sell(ctx, req.(*SellRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PokemonFightService_CreateArena_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateArenaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PokemonFightServiceServer).CreateArena(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/protocol.PokemonFightService/CreateArena",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PokemonFightServiceServer).CreateArena(ctx, req.(*CreateArenaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PokemonFightService_MakeDamage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DamageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PokemonFightServiceServer).MakeDamage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/protocol.PokemonFightService/MakeDamage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PokemonFightServiceServer).MakeDamage(ctx, req.(*DamageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -767,8 +982,16 @@ var _PokemonFightService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _PokemonFightService_Buy_Handler,
 		},
 		{
-			MethodName: "Fight",
-			Handler:    _PokemonFightService_Fight_Handler,
+			MethodName: "Sell",
+			Handler:    _PokemonFightService_Sell_Handler,
+		},
+		{
+			MethodName: "CreateArena",
+			Handler:    _PokemonFightService_CreateArena_Handler,
+		},
+		{
+			MethodName: "MakeDamage",
+			Handler:    _PokemonFightService_MakeDamage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

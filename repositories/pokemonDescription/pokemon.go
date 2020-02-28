@@ -1,18 +1,18 @@
 package pokemonDescription
 
 type Pokemon struct {
-	name          string  `db:"name"`
-	image         string  `db:"image"`
-	price         int32   `db:"price"`
-	healthPoints  int32   `db:"healthpoints"`
-	healthRegen   int32   `db:"healthregen"`
-	mana          int32   `db:"mana"`
-	manaRegen     int32   `db:"manaregen"`
-	armor         float32 `db:"armor"`
-	damage        int32   `db:"damage"`
-	movementSpeed int32   `db:"movementspeed"`
-	attackSpeed   int32   `db:"attackspeed"`
-	attackRange   int32   `db:"attackrange"`
+	Name          string  `db:"name"`
+	Image         string  `db:"image"`
+	Price         int32   `db:"price"`
+	HealthPoints  int32   `db:"healthpoints"`
+	HealthRegen   int32   `db:"healthregen"`
+	Mana          int32   `db:"mana"`
+	ManaRegen     int32   `db:"manaregen"`
+	Armor         float32 `db:"armor"`
+	Damage        int32   `db:"damage"`
+	MovementSpeed int32   `db:"movementspeed"`
+	AttackSpeed   int32   `db:"attackspeed"`
+	AttackRange   int32   `db:"attackrange"`
 }
 type Repository interface {
 	Create(pokemon *Pokemon) error

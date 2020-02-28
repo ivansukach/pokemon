@@ -22,7 +22,7 @@ func (ar *arenaRepository) Create(arena *Arena) (int64, error) {
 	id, err := res.LastInsertId()
 	return id, err
 }
-func (ar *arenaRepository) Get(id string) (*Arena, error) {
+func (ar *arenaRepository) Get(id int64) (*Arena, error) {
 	a := Arena{}
 	err := ar.db.QueryRowx("SELECT * FROM arena WHERE Id=$1", id).StructScan(&a)
 	if err != nil {
@@ -35,7 +35,7 @@ func (ar *arenaRepository) Update(arena *Arena) error {
 	_, err := ar.db.NamedExec("UPDATE arena SET (:health1, :health2, :x1, :y1, :x2, :y2, :winner) WHERE Id=:id", arena) //Health1=:health1
 	return err
 }
-func (ar *arenaRepository) Delete(id string) error {
+func (ar *arenaRepository) Delete(id int64) error {
 	_, err := ar.db.Exec("DELETE FROM arena WHERE id=$1", id) //id!=Id???
 	return err
 }
