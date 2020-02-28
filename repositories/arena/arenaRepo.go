@@ -14,8 +14,8 @@ func New(db *sqlx.DB) Repository {
 }
 
 func (ar *arenaRepository) Create(arena *Arena) (int64, error) {
-	res, err := ar.db.NamedExec("INSERT INTO arena(Fighter1, Fighter2, Health1, Health2, X1, Y1, X2, Y2) VALUES"+
-		" (:fighter1, :fighter2, :health1, :health2, 0, 0, 0, 0) RETURNING Id", arena)
+	res, err := ar.db.NamedExec("INSERT INTO arena(Fighter1, Health1, X1, Y1) VALUES"+
+		" (:fighter1, :health1, 0, 0) RETURNING Id", arena)
 	if err != nil {
 		return 0, err
 	}

@@ -186,17 +186,7 @@ func (s *Server) CreateArena(ctx context.Context, req *protocol.CreateArenaReque
 		log.Error(err)
 		return nil, err
 	}
-	pokemonName2, err := s.gs.GetPokemonNameById(req.Id2)
-	if err != nil {
-		log.Error(err)
-		return nil, err
-	}
 	pokemon1, err := s.gs.GetPokemon(pokemonName1)
-	if err != nil {
-		log.Error(err)
-		return nil, err
-	}
-	pokemon2, err := s.gs.GetPokemon(pokemonName2)
 	if err != nil {
 		log.Error(err)
 		return nil, err
@@ -204,9 +194,9 @@ func (s *Server) CreateArena(ctx context.Context, req *protocol.CreateArenaReque
 	arena := arena.Arena{
 		Id:       0,
 		Fighter1: req.Id1,
-		Fighter2: req.Id2,
+		Fighter2: 0,
 		Health1:  pokemon1.HealthPoints,
-		Health2:  pokemon2.HealthPoints,
+		Health2:  0,
 		X1:       0,
 		Y1:       0,
 		X2:       0,
@@ -219,4 +209,27 @@ func (s *Server) CreateArena(ctx context.Context, req *protocol.CreateArenaReque
 		return nil, err
 	}
 	return &protocol.ArenaId{IdArena: idArena}, nil
+}
+func (s *Server) SetOpponent(ctx context.Context, req *protocol.Competition) error {
+	pokemonName2, err := s.gs.GetPokemonNameById(req.IdOpponent)
+	if err != nil {
+		log.Error(err)
+		return err
+	}
+	pokemon2, err := s.gs.GetPokemon(pokemonName2)
+	if err != nil {
+		log.Error(err)
+		return err
+	}
+	arena, err := s.gs.GetArena(req.IdArena)
+	if err != nil {
+		log.Error(err)
+		return err
+	}
+	arena.Fighter2 = req.IdOpponent
+	arena.Health2 = pokemon2.Health
+	arena.X2 = 0
+	arena.Y2 = 0
+	err = s.gs.UpdateArena(arena)
+	return err
 }

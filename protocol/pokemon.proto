@@ -46,10 +46,13 @@ message DamageRequest{
 }
 message CreateArenaRequest{
     int64 id1 = 1;
-    int64 id2 = 2;
 }
 message ArenaId{
     int64 idArena = 1;
+}
+message Competition{
+    int64 idOpponent = 1;
+    int64 idArena = 2;
 }
 service PokemonFightService{
     rpc Create(Pokemon) returns(EmptyResponse);//
@@ -61,5 +64,6 @@ service PokemonFightService{
     rpc Sell(SellRequest) returns(EmptyResponse);//
     rpc CreateArena(CreateArenaRequest) returns(ArenaId);//
     rpc MakeDamage(DamageRequest) returns(EmptyResponse);//
+    rpc SetOpponent(Competition) returns(EmptyResponse);
 }
 
