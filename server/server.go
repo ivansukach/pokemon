@@ -233,3 +233,30 @@ func (s *Server) SetOpponent(ctx context.Context, req *protocol.Competition) err
 	err = s.gs.UpdateArena(arena)
 	return err
 }
+func (s *Server) Move(ctx context.Context, req *protocol.Movement) error {
+	pokemonName, err := s.gs.GetPokemonNameById(req.IdCompetitor)
+	if err != nil {
+		log.Error(err)
+		return err
+	}
+	pokemon, err := s.gs.GetPokemon(pokemonName)
+	if err != nil {
+		log.Error(err)
+		return err
+	}
+	arena, err := s.gs.GetArena(req.IdArena)
+	if err != nil {
+		log.Error(err)
+		return err
+	}
+	if arena.Fighter1 == req.IdCompetitor {
+		arena.X2 += req.DeltaXTime * pokemon.MovementSpeed
+		arena.Y2 += req.DeltaYTime * pokemon.MovementSpeed
+	} else {
+		arena.X2 += req.DeltaXTime * pokemon.MovementSpeed
+		arena.Y2 += req.DeltaYTime * pokemon.MovementSpeed //it shouldn't move out of screen bounds
+	}
+
+	err = s.gs.UpdateArena(arena)
+	return err
+}

@@ -54,6 +54,12 @@ message Competition{
     int64 idOpponent = 1;
     int64 idArena = 2;
 }
+message Movement{
+    int64 idArena = 1;
+    int64 idCompetitor = 2;
+    int32 deltaXTime = 3;
+    int32 deltaYTime = 4;
+}
 service PokemonFightService{
     rpc Create(Pokemon) returns(EmptyResponse);//
     rpc Delete(DeleteRequest) returns(EmptyResponse);//
@@ -64,6 +70,7 @@ service PokemonFightService{
     rpc Sell(SellRequest) returns(EmptyResponse);//
     rpc CreateArena(CreateArenaRequest) returns(ArenaId);//
     rpc MakeDamage(DamageRequest) returns(EmptyResponse);//
-    rpc SetOpponent(Competition) returns(EmptyResponse);
+    rpc SetOpponent(Competition) returns(EmptyResponse);//
+    rpc Move(Movement) returns(EmptyResponse);
 }
 
