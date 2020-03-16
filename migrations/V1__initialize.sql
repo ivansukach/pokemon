@@ -43,7 +43,7 @@ CREATE TABLE abilitiesDescription(
 
 
 CREATE TABLE usersProperties(
-    IdOfPokemon SERIAL,
+    IdOfPokemon SERIAL PRIMARY KEY,
     Login TEXT REFERENCES users,
     Name TEXT REFERENCES pokemonDescription
 );

@@ -227,7 +227,7 @@ func (s *Server) SetOpponent(ctx context.Context, req *protocol.Competition) err
 		return err
 	}
 	arena.Fighter2 = req.IdOpponent
-	arena.Health2 = pokemon2.Health
+	arena.Health2 = pokemon2.HealthPoints
 	arena.X2 = 0
 	arena.Y2 = 0
 	err = s.gs.UpdateArena(arena)
@@ -250,11 +250,35 @@ func (s *Server) Move(ctx context.Context, req *protocol.Movement) error {
 		return err
 	}
 	if arena.Fighter1 == req.IdCompetitor {
-		arena.X2 += req.DeltaXTime * pokemon.MovementSpeed
-		arena.Y2 += req.DeltaYTime * pokemon.MovementSpeed
+		arena.X1 += req.DeltaXTime * pokemon.MovementSpeed
+		if arena.X1 > 100 {
+			arena.X1 = 100
+		}
+		if arena.X1 < 0 {
+			arena.X1 = 0
+		}
+		arena.Y1 += req.DeltaYTime * pokemon.MovementSpeed
+		if arena.Y1 > 100 {
+			arena.Y1 = 100
+		}
+		if arena.Y1 < 0 {
+			arena.Y1 = 0
+		}
 	} else {
 		arena.X2 += req.DeltaXTime * pokemon.MovementSpeed
+		if arena.X2 > 100 {
+			arena.X2 = 100
+		}
+		if arena.X2 < 0 {
+			arena.X2 = 0
+		}
 		arena.Y2 += req.DeltaYTime * pokemon.MovementSpeed //it shouldn't move out of screen bounds
+		if arena.Y2 > 100 {
+			arena.Y2 = 100
+		}
+		if arena.Y2 < 0 {
+			arena.Y2 = 0
+		}
 	}
 
 	err = s.gs.UpdateArena(arena)

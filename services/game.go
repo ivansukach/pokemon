@@ -1,11 +1,11 @@
 package services
 
 import (
+	"github.com/ivansukach/pokemon-auth/repositories/users"
 	"github.com/ivansukach/pokemon/repositories/abilities"
 	"github.com/ivansukach/pokemon/repositories/abilitiesDescription"
 	"github.com/ivansukach/pokemon/repositories/arena"
 	"github.com/ivansukach/pokemon/repositories/pokemonDescription"
-	"github.com/ivansukach/pokemon/repositories/users"
 	"github.com/ivansukach/pokemon/repositories/usersProperties"
 )
 
@@ -16,22 +16,6 @@ type Game struct {
 	arenaRepository                arena.Repository
 	abilitiesDescriptionRepository abilitiesDescription.Repository
 	abilitiesRepository            abilities.Repository
-}
-
-func (gs *Game) CreateUser(user *users.User) error {
-	return gs.userRepository.Create(user)
-}
-func (gs *Game) UpdateUser(user *users.User) error {
-	return gs.userRepository.Update(user)
-}
-func (gs *Game) GetUser(login string) (*users.User, error) {
-	return gs.userRepository.Get(login)
-}
-func (gs *Game) DeleteUser(id string) error {
-	return gs.userRepository.Delete(id)
-}
-func (gs *Game) ListingUsers() ([]users.User, error) {
-	return gs.userRepository.Listing()
 }
 
 func (gs *Game) CreateAbility(ability *abilities.Ability) error {

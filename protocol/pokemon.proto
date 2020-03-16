@@ -71,6 +71,8 @@ service PokemonFightService{
     rpc CreateArena(CreateArenaRequest) returns(ArenaId);//
     rpc MakeDamage(DamageRequest) returns(EmptyResponse);//
     rpc SetOpponent(Competition) returns(EmptyResponse);//
-    rpc Move(Movement) returns(EmptyResponse);
+    rpc Move(Movement) returns(EmptyResponse);//
+
+
 }
 
